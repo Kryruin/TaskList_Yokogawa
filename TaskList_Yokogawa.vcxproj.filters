@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TaskList_Yokogawa.cpp">
+    <ClCompile Include="source\TaskList_Yokogawa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
