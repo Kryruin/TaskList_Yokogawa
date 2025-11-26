@@ -12,11 +12,12 @@ Tasks are stored in memory for the duration of the program run.
 - View all tasks with status and due date
 - Mark tasks as completed
 - Delete tasks
-- Color-coded output: completed tasks in green, pending tasks in red (ANSI escape codes)
+- Color-coded output: completed tasks in green, pending tasks in red
 
 ## Requirements
 
-- Visual Studio with a C++ toolset that supports C++20
+- Visual Studio with C++ 20
+- Microsoft’s C++ Unit Test Framework
 
 ## Build & Run
 
@@ -26,13 +27,14 @@ Tasks are stored in memory for the duration of the program run.
 ## Usage
 
 1. Run the program.
-2. Use the menu to add, view, mark complete, or delete tasks
+2. Use the menu to add, view, mark complete, or delete tasks accordingly
 
 ## Testing
 1. Handles invalid menu input by rejecting non-numeric values and options that are not in the menu.
 2. Enforces DD-MM-YYYY date format and prevents due dates from being set before the current date.
 3. Validates task selection for deletion or completion by rejecting non-numeric input and indices outside the valid task range.
-## $ Unit testing
+
+## Unit testing
 - Add, complete, and validate tasks
 - Add, delete, and verify tasks in the list
 - Validate task due date format and constraints
