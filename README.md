@@ -32,6 +32,13 @@ Tasks are stored in memory for the duration of the program run.
 1. Handles invalid menu input by rejecting non-numeric values and options that are not in the menu.
 2. Enforces DD-MM-YYYY date format and prevents due dates from being set before the current date.
 3. Validates task selection for deletion or completion by rejecting non-numeric input and indices outside the valid task range.
+## $ Unit testing
+- Add, complete, and validate tasks
+- Add, delete, and verify tasks in the list
+- Validate task due date format and constraints
+- Validate task ID ranges within the task list
+- Add multiple tasks and verify correct deletion behavior
 
-
+## Demo
+[Watch the demo here](https://drive.google.com/file/d/1FUPNypykfTy3MUgq5gYXmA7AHC88ePlG/view?usp=drive_link)
 
