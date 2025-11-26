@@ -2,28 +2,40 @@
 #include "Utility.h"
 #include <iostream>
 void TaskList::ViewTasks() {
+    if (!taskList.size()) {
+        std::cout << "No tasks to display" << std::endl;
+        return;
+    }
     for (int i = 0; i < taskList.size(); ++i) {
+        const std::string taskColour = taskList[i].IsCompleted() ? COLOUR::GREEN : COLOUR::RED;
         //Print index and task data
-        std::cout << i + 1 << ". " << taskList[i].ToString() << std::endl;
+        Utility::PrintColour(taskColour, std::to_string(i + 1) + ". " + taskList[i].ToString());
     }
 }
-void TaskList::AddTask(const std::string& name, const std::string& date) {
+bool TaskList::AddTask(const std::string& name, const std::string& date) {
     if (Utility::isValidDueDate(date)) {
         taskList.push_back(Task(name, date));
-        std::cout << "Adding task: " << name << " " << date << std::endl;
+        return true;
     }
-    else {
-        std::cout << "Invalid format detected. Please enter date with the DD-MM-YYYY format AFTER today" << std::endl;
-    }
+    else 
+        return false;
+    
 }
-//Sets task from non incomplete to completed
-bool TaskList::SetTaskComplete(const int& choice) {
-    //Invalid option
+Task TaskList::DeleteTask(const int& choice)
+{
+	Task tempTask = taskList[choice - 1];
+    taskList.erase(taskList.begin() + (choice - 1));
+    return tempTask;
+}
+bool TaskList::IsValidTaskID(const int& choice) const
+{
     if (choice < 1 || choice > taskList.size()) {
-        std::cout << "Invalid option.... Please select a valid task id" << std::endl;
         return false;
     }
-    taskList[choice - 1].SetComplete();
-    std::cout << "Task( " << taskList[choice - 1].ToString() << ") has been updated" << std::endl;
     return true;
+}
+//Sets task from non incomplete to completed
+const Task&  TaskList::SetTaskComplete(const int& choice) {
+    taskList[choice - 1].MarkComplete();
+    return taskList[choice - 1];
 }

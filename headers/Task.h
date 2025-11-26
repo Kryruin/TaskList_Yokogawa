@@ -8,5 +8,6 @@ class Task {
 public:
     Task(const std::string& name, const std::string& dueDate);
     const std::string ToString() const;
-    void SetComplete();
+    bool IsCompleted() const;
+    void MarkComplete();
 };

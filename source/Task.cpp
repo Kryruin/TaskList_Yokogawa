@@ -8,10 +8,13 @@ isCompleted(false)
 }
 const std::string Task::ToString() const {
     std::string status = isCompleted ? "Completed" : "Pending";
-    return "[" + status + "] " + name + "\t |\t Due: " + dueDate;
+    return "[" + status + "] " + name + "\nDue: " + dueDate;
 }
 
-void Task::SetComplete()
+void Task::MarkComplete()
 {
     isCompleted = true;
+}
+bool Task::IsCompleted() const {
+    return isCompleted;
 }

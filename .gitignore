@@ -36,8 +36,12 @@
 *.exe
 *.out
 *.app
+packages
+
 
 # debug information files
 *.dwo
 /.vs
 /TaskList.06091ebb/x64/Debug
+x64
+
