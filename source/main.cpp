@@ -1,53 +1,18 @@
 // TaskList_Yokogawa.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include "TaskList.h"
+#include "Utility.h"
 #include <iostream>
-#include <string>
-#include <vector>
-struct Task {
-    std::string name;
-    std::string dueDate;
-    bool isCompleted;
-    Task(const std::string& name, const std::string& dueDate) : 
-        name(name), 
-        dueDate(dueDate),
-        isCompleted(false) 
-    {}
-    const std::string ToString() const{
-        std::string status = isCompleted ? "Completed" : "Pending";
-        return "[" + status + "] " + name + "\t |\t Due: " + dueDate;
-    }
-};
-
-class TaskList {
-    std::vector<Task> taskList;
-public:
-    void ViewTasks() {
-        for (int i = 0; i < taskList.size(); ++i) {
-            std::cout<< i+1<< ". " << taskList[i].ToString() << std::endl;
-        }
-    }
-    void AddTask(const Task& newTask) {
-        taskList.push_back(newTask);
-    }
-    //Sets task from non incomplete to completed
-    void SetTaskComplete(const int& choice) {
-        //Invalid option
-        if (choice < 1 || choice > taskList.size()) {
-            std::cout << "Invalid option.... Please select a valid task id" << std::endl;
-            return;
-        }
-        taskList[choice - 1].isCompleted = true;
-        std::cout << "Task( "<<taskList[choice - 1].ToString()<< ") has been updated" << std::endl;
-    }
-};
-
 void PrintMenu() {
+    std::cout << "\n==========================\n";
     std::cout << "\n===== Task List Menu =====\n";
+    std::cout << "\n==========================\n";
     std::cout << "1. Add Task"<<std::endl;
     std::cout << "2. View Tasks" << std::endl;
     std::cout << "3. Mark Task as Completed" << std::endl;
-    std::cout << "4. Exit\n";
+    std::cout << "4. Clear the screen\n";
+    std::cout << "5. Exit\n";
     std::cout << "Select an option: ";
 }
 int main()
@@ -57,9 +22,8 @@ int main()
     //Main Loop
     while (true) {
         PrintMenu();
-        std::cin >> choice;
         //Invalid input
-        if (!choice){
+        if (!(std::cin >> choice)){
             std::cout << "Please enter a valid number" << std::endl;
             //Reset failbit
             std::cin.clear();
@@ -68,6 +32,11 @@ int main()
             continue;
         }
         if (choice == 4) {
+            std::system("cls");
+            continue;
+        }
+
+        if (choice == 5) {
             std::cout << "Exiting application!" << std::endl;
             break;
         }
@@ -81,8 +50,7 @@ int main()
             std::cout << "Please enter due date in DD-MM-YYYY format: ";
             std::getline(std::cin, date);
             //Add validation
-            std::cout << name << " " << date << std::endl;
-            taskList.AddTask(Task(name, date));
+            taskList.AddTask(name, date);
         }
         //View Tasks
         else if (choice == 2) {
@@ -94,9 +62,8 @@ int main()
                 std::cout << "Please select a task id or press 0 to head back to main menu: " << std::endl;
                 int taskChoice = -1;
                 taskList.ViewTasks();
-                std::cin >> taskChoice;
                 //Invalid input
-                if (!taskChoice) {
+                if (!(std::cin >> taskChoice)) {
                     std::cout << "Please enter valid input" << std::endl;
                     //Reset failbit
                     std::cin.clear();
@@ -104,9 +71,12 @@ int main()
                     std::cin.ignore(INT_MAX, '\n');
                     continue;
                 }
-                //Valid input
-                taskList.SetTaskComplete(taskChoice);
-                break;
+                if (taskChoice == 0) {
+                    std::cout << "Going back to main menu" << std::endl;
+                    break;
+                }
+                if (taskList.SetTaskComplete(taskChoice))
+                    break;
             }
         }
     }
