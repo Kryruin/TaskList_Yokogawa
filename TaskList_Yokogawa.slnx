@@ -4,4 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="TaskList_Yokogawa.vcxproj" Id="06091ebb-068c-4cda-b092-b751e9b72c7b" />
+  <Project Path="UnitTests/UnitTests.vcxproj" />
 </Solution>

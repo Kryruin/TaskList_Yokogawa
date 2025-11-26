@@ -21,6 +21,10 @@ bool TaskList::AddTask(const std::string& name, const std::string& date) {
         return false;
     
 }
+const std::vector<Task>& TaskList::GetList()
+{
+    return taskList;
+}
 Task TaskList::DeleteTask(const int& choice)
 {
 	Task tempTask = taskList[choice - 1];
